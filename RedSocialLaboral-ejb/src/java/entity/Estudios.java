@@ -6,11 +6,12 @@
 package entity;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -18,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -30,8 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Estudios.findAll", query = "SELECT e FROM Estudios e")
-    , @NamedQuery(name = "Estudios.findById", query = "SELECT e FROM Estudios e WHERE e.estudiosPK.id = :id")
-    , @NamedQuery(name = "Estudios.findByUsuario", query = "SELECT e FROM Estudios e WHERE e.estudiosPK.usuario = :usuario")
+    , @NamedQuery(name = "Estudios.findById", query = "SELECT e FROM Estudios e WHERE e.id = :id")
     , @NamedQuery(name = "Estudios.findByFechainicio", query = "SELECT e FROM Estudios e WHERE e.fechainicio = :fechainicio")
     , @NamedQuery(name = "Estudios.findByFechafin", query = "SELECT e FROM Estudios e WHERE e.fechafin = :fechafin")
     , @NamedQuery(name = "Estudios.findByUbicacion", query = "SELECT e FROM Estudios e WHERE e.ubicacion = :ubicacion")
@@ -39,8 +40,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Estudios implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected EstudiosPK estudiosPK;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ID")
+    private BigDecimal id;
     @Column(name = "FECHAINICIO")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechainicio;
@@ -53,27 +58,23 @@ public class Estudios implements Serializable {
     @Size(max = 200)
     @Column(name = "DESCRIPCION")
     private String descripcion;
-    @JoinColumn(name = "USUARIO", referencedColumnName = "ID", insertable = false, updatable = false)
+    @JoinColumn(name = "USUARIO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Usuario usuario1;
+    private Usuario usuario;
 
     public Estudios() {
     }
 
-    public Estudios(EstudiosPK estudiosPK) {
-        this.estudiosPK = estudiosPK;
+    public Estudios(BigDecimal id) {
+        this.id = id;
     }
 
-    public Estudios(BigInteger id, BigInteger usuario) {
-        this.estudiosPK = new EstudiosPK(id, usuario);
+    public BigDecimal getId() {
+        return id;
     }
 
-    public EstudiosPK getEstudiosPK() {
-        return estudiosPK;
-    }
-
-    public void setEstudiosPK(EstudiosPK estudiosPK) {
-        this.estudiosPK = estudiosPK;
+    public void setId(BigDecimal id) {
+        this.id = id;
     }
 
     public Date getFechainicio() {
@@ -108,18 +109,18 @@ public class Estudios implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Usuario getUsuario1() {
-        return usuario1;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuario1(Usuario usuario1) {
-        this.usuario1 = usuario1;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (estudiosPK != null ? estudiosPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -130,7 +131,7 @@ public class Estudios implements Serializable {
             return false;
         }
         Estudios other = (Estudios) object;
-        if ((this.estudiosPK == null && other.estudiosPK != null) || (this.estudiosPK != null && !this.estudiosPK.equals(other.estudiosPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -138,7 +139,7 @@ public class Estudios implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Estudios[ estudiosPK=" + estudiosPK + " ]";
+        return "entity.Estudios[ id=" + id + " ]";
     }
     
 }
