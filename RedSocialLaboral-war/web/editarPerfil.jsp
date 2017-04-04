@@ -2,6 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    String msg;
     String titulo;
     Usuario u = (Usuario) request.getAttribute("usuario");
     if (u == null) {
@@ -24,7 +25,10 @@
         error = new Integer(0);
     }
     
-    String msg;
+    String back = "Principal";
+    if (u.getId() == null) {
+        back = "login.jsp";
+    }
 %>
 <html>
     <head>
@@ -32,7 +36,7 @@
         <title><%= titulo %></title>
     </head>
     <body>
-        <h1>perfil.jsp</h1>
+        <h1>EditarPerfil.jsp</h1>
         <div>
             <form name="edicion" action="Guardar" method="post">
                 <input type="hidden" name="id" value="<%= u.getId()%>" />
@@ -105,7 +109,7 @@
                         <td colspan="2"><input type="submit" name="btnSend" value="Enviar" /></td>
                     </tr>
                 </table>
-                <a href="Principal"> Volver </a>
+                <a href="<%= back %>"> Volver </a>
             </form>
         </div>
     </body>

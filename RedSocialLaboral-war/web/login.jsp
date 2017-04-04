@@ -54,7 +54,7 @@
                         <td colspan="2"><input type="submit" name="btnLogin" value="Log In" /></td>
                     </tr>
                 </table>
-                <a href="perfil.jsp"> Sign In </a>
+                <a href="editarPerfil.jsp"> Sign In </a>
             </form>
         </div>
     </body>

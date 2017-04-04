@@ -49,9 +49,9 @@ public class ServletVerPerfil extends HttpServlet {
         
         Usuario u = usuarioFacade.find(id);
         
-        request.setAttribute("usuario", u);
+        request.setAttribute("usuarioSeleccionado", u);
         
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/perfil.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/verPerfil.jsp");
         rd.forward(request, response);
     }
 
