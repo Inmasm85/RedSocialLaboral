@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -45,6 +46,7 @@ public class Estudios implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
+    @SequenceGenerator(name="ESTUDIOS_SEQ", sequenceName = "ESTUDIOS_SEQ", allocationSize=1)
     private BigDecimal id;
     @Column(name = "FECHAINICIO")
     @Temporal(TemporalType.TIMESTAMP)

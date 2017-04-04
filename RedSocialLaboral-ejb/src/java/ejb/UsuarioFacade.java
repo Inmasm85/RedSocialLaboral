@@ -9,6 +9,7 @@ import entity.Usuario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +30,9 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         super(Usuario.class);
     }
     
+    public Usuario findByEmail(String email) {
+        Query q = em.createNamedQuery("Usuario.findByEmail");
+        q.setParameter("email", email);
+        return (Usuario) q.getSingleResult();
+    }
 }
