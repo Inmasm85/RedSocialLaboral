@@ -105,7 +105,7 @@
                         <td colspan="2"><input type="submit" name="btnSend" value="Enviar" /></td>
                     </tr>
                 </table>
-                <a href="/Principal"> Volver </a>
+                <a href="Principal"> Volver </a>
             </form>
         </div>
     </body>
