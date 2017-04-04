@@ -15,6 +15,6 @@
         <h1>principal.jsp</h1>
         <%= datos %>
         <br/>
-        <a href="login.jsp"> Log Out </a>
+        <a href="Logout"> Log Out </a>
     </body>
 </html>
