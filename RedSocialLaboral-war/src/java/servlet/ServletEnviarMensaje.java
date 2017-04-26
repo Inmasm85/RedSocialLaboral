@@ -5,33 +5,45 @@
  */
 package servlet;
 
-import ejb.UsuarioFacade;
-import entity.Usuario;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import ejb.MensajeFacade;
+import ejb.UsuarioFacade;
+import entity.Mensaje;
+import entity.Usuario;
 
 /**
  *
- * @author Roberto
+ * @author anton
  */
-@WebServlet(name = "ServletGuardarUsuario", urlPatterns = {"/Guardar"})
-public class ServletGuardarUsuario extends HttpServlet {
-    
+@WebServlet(name = "ServletEnviarMensaje", urlPatterns = {"/ServletEnviarMensaje"})
+public class ServletEnviarMensaje extends HttpServlet {
+
     @EJB
-    private final UsuarioFacade usuarioFacade;
+    private MensajeFacade mensajeFacade;
+
+    @EJB
+    private UsuarioFacade usuarioFacade;
     
-    public ServletGuardarUsuario() {
+    private List<Usuario> usuarios = new ArrayList<Usuario>();
+    
+    public ServletEnviarMensaje(){
+        mensajeFacade = new MensajeFacade();
         usuarioFacade = new UsuarioFacade();
     }
-
+    
+   
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,61 +57,26 @@ public class ServletGuardarUsuario extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
+        
         BigDecimal id = (BigDecimal) session.getAttribute("usuarioId");
+
+        BigDecimal idDestinatario = new BigDecimal(request.getParameter("destinatario"));
+        String texto = (String)request.getParameter("mensaje");
+        Usuario usuario = usuarioFacade.find(id);
+        Usuario receptor = usuarioFacade.find(idDestinatario);
+        Date fechaHora = new Date(System.currentTimeMillis());
         
-        int error = 0;
-        String email = request.getParameter("email");
-        if (email == null || email.isEmpty()) {
-            error = 1; // error = [1 3 5 7]
-        }
-        String pass = request.getParameter("pass");
-        if (pass == null || pass.isEmpty()) {
-            error += 2; // error = [2 3 6 7]
-        }
-        String nombre = request.getParameter("nombre");
-        if (nombre == null || nombre.isEmpty()) {
-            error += 4; // error = [4 5 6 7]
-        }
-        String apellidos = request.getParameter("apellidos");
-        String twitter = request.getParameter("twitter");
-        String instagram = request.getParameter("instagram");
-        String web = request.getParameter("web");
-        String foto = request.getParameter("foto");
+        Mensaje mensaje = new Mensaje();
         
-        Usuario u;
-        String next = "/Principal";
-        if (error == 0) {
-            Boolean nuevo = Boolean.FALSE;
-            if (id == null) {
-                u = new Usuario();
-                nuevo = Boolean.TRUE;
-                next = "/login.jsp";
-            } else {
-                u = usuarioFacade.find(id);
-            }
-            u.setEmail(email);
-            u.setPass(pass);
-            u.setNombre(nombre);
-            u.setApellidos(apellidos);
-            u.setTwitter(twitter);
-            u.setInstagram(instagram);
-            u.setWeb(web);
-            u.setFoto(foto);
-            if (nuevo) {
-                usuarioFacade.create(u);
-            } else {
-                usuarioFacade.edit(u);
-            }
-        } else {
-            request.setAttribute("error", error);
-            next = "/editarPerfil.jsp";
-            // COMPLETAR
-            // Faltan datos para del insert y se vuelve al jsp correspondiente
-            // indicando los campos que faltan por rellenar
-        }
+        mensaje.setMensaje(texto);
+        mensaje.setEmisor(usuario);
+        mensaje.setReceptor(receptor);
+        mensaje.setFecha(fechaHora);
+        mensaje.setVisto("F".charAt(0));
         
-        RequestDispatcher rd = getServletContext().getRequestDispatcher(next);
-        rd.forward(request, response);
+        mensajeFacade.create(mensaje);
+        
+        response.sendRedirect("ServletMostrarMensajesEnviados");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

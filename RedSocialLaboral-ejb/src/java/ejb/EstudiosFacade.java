@@ -6,9 +6,12 @@
 package ejb;
 
 import entity.Estudios;
+import java.math.BigDecimal;
+import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +32,9 @@ public class EstudiosFacade extends AbstractFacade<Estudios> {
         super(Estudios.class);
     }
     
+    public Collection<Estudios> findByIdUsuario(BigDecimal id) {
+        Query q = em.createNamedQuery("Estudios.findByIdUsuario");
+        q.setParameter("id", id);
+        return q.getResultList();
+    }
 }

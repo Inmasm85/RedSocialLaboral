@@ -32,8 +32,8 @@
 <%
                         switch (error) {
                             case 1:
-                            case 3: msg = "Introduzca email"; break;
-                            case 4: msg = "Email o password incorrectos"; break;
+                            case 3: msg = " Introduzca email"; break;
+                            case 4: msg = " Email o password incorrecto"; break;
                             default: msg = "";
                         }
 %>
@@ -42,8 +42,8 @@
 <%
                         switch (error) {
                             case 2:
-                            case 3: msg = "Introduzca password"; break;
-                            case 4: msg = "Email o password incorrectos"; break;
+                            case 3: msg = " Introduzca password"; break;
+                            case 4: msg = " Email o password incorrecto"; break;
                             default: msg = "";
                         }
 %>

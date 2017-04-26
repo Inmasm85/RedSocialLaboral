@@ -6,7 +6,7 @@
 package entity;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -28,12 +28,12 @@ public class AficionPK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "USUARIO")
-    private BigInteger usuario;
+    private BigDecimal usuario;
 
     public AficionPK() {
     }
 
-    public AficionPK(String nombre, BigInteger usuario) {
+    public AficionPK(String nombre, BigDecimal usuario) {
         this.nombre = nombre;
         this.usuario = usuario;
     }
@@ -46,11 +46,11 @@ public class AficionPK implements Serializable {
         this.nombre = nombre;
     }
 
-    public BigInteger getUsuario() {
+    public BigDecimal getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(BigInteger usuario) {
+    public void setUsuario(BigDecimal usuario) {
         this.usuario = usuario;
     }
 

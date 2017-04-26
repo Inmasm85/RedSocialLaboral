@@ -5,8 +5,8 @@
  */
 package servlet;
 
-import ejb.UsuarioFacade;
-import entity.Usuario;
+import ejb.EstudiosFacade;
+import entity.Estudios;
 import java.io.IOException;
 import java.math.BigDecimal;
 import javax.ejb.EJB;
@@ -16,20 +16,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Roberto
  */
-@WebServlet(name = "ServletGuardarUsuario", urlPatterns = {"/Guardar"})
-public class ServletGuardarUsuario extends HttpServlet {
-    
+@WebServlet(name = "ServletBorrarEstudios", urlPatterns = {"/BorrarEstudios"})
+public class ServletBorrarEstudios extends HttpServlet {
+
     @EJB
-    private final UsuarioFacade usuarioFacade;
+    private final EstudiosFacade estudiosFacade;
     
-    public ServletGuardarUsuario() {
-        usuarioFacade = new UsuarioFacade();
+    public ServletBorrarEstudios() {
+        estudiosFacade = new EstudiosFacade();
     }
 
     /**
@@ -43,62 +42,16 @@ public class ServletGuardarUsuario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession session = request.getSession();
-        BigDecimal id = (BigDecimal) session.getAttribute("usuarioId");
-        
-        int error = 0;
-        String email = request.getParameter("email");
-        if (email == null || email.isEmpty()) {
-            error = 1; // error = [1 3 5 7]
-        }
-        String pass = request.getParameter("pass");
-        if (pass == null || pass.isEmpty()) {
-            error += 2; // error = [2 3 6 7]
-        }
-        String nombre = request.getParameter("nombre");
-        if (nombre == null || nombre.isEmpty()) {
-            error += 4; // error = [4 5 6 7]
-        }
-        String apellidos = request.getParameter("apellidos");
-        String twitter = request.getParameter("twitter");
-        String instagram = request.getParameter("instagram");
-        String web = request.getParameter("web");
-        String foto = request.getParameter("foto");
-        
-        Usuario u;
-        String next = "/Principal";
-        if (error == 0) {
-            Boolean nuevo = Boolean.FALSE;
-            if (id == null) {
-                u = new Usuario();
-                nuevo = Boolean.TRUE;
-                next = "/login.jsp";
-            } else {
-                u = usuarioFacade.find(id);
-            }
-            u.setEmail(email);
-            u.setPass(pass);
-            u.setNombre(nombre);
-            u.setApellidos(apellidos);
-            u.setTwitter(twitter);
-            u.setInstagram(instagram);
-            u.setWeb(web);
-            u.setFoto(foto);
-            if (nuevo) {
-                usuarioFacade.create(u);
-            } else {
-                usuarioFacade.edit(u);
-            }
+        String str = request.getParameter("estudiosId");
+        if (str != null && !str.isEmpty()) {
+            Estudios e = estudiosFacade.find(new BigDecimal(str));
+            estudiosFacade.remove(e);
+            str = "/EditarEstudios";
         } else {
-            request.setAttribute("error", error);
-            next = "/editarPerfil.jsp";
-            // COMPLETAR
-            // Faltan datos para del insert y se vuelve al jsp correspondiente
-            // indicando los campos que faltan por rellenar
+            str = "/Logout";
         }
         
-        RequestDispatcher rd = getServletContext().getRequestDispatcher(next);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher(str);
         rd.forward(request, response);
     }
 

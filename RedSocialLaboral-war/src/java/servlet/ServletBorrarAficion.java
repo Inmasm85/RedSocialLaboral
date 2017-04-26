@@ -5,8 +5,9 @@
  */
 package servlet;
 
-import ejb.UsuarioFacade;
-import entity.Usuario;
+import ejb.AficionFacade;
+import entity.Aficion;
+import entity.AficionPK;
 import java.io.IOException;
 import java.math.BigDecimal;
 import javax.ejb.EJB;
@@ -22,14 +23,14 @@ import javax.servlet.http.HttpSession;
  *
  * @author Roberto
  */
-@WebServlet(name = "ServletGuardarUsuario", urlPatterns = {"/Guardar"})
-public class ServletGuardarUsuario extends HttpServlet {
-    
+@WebServlet(name = "ServletBorrarAficion", urlPatterns = {"/BorrarAficion"})
+public class ServletBorrarAficion extends HttpServlet {
+
     @EJB
-    private final UsuarioFacade usuarioFacade;
+    private final AficionFacade aficionFacade;
     
-    public ServletGuardarUsuario() {
-        usuarioFacade = new UsuarioFacade();
+    public ServletBorrarAficion() {
+        aficionFacade = new AficionFacade();
     }
 
     /**
@@ -43,62 +44,29 @@ public class ServletGuardarUsuario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         HttpSession session = request.getSession();
-        BigDecimal id = (BigDecimal) session.getAttribute("usuarioId");
+        BigDecimal usuarioId = (BigDecimal) session.getAttribute("usuarioId");
+        String str = request.getParameter("aficion");
+        if (str == null) {
+            str = "";
+        }
         
-        int error = 0;
-        String email = request.getParameter("email");
-        if (email == null || email.isEmpty()) {
-            error = 1; // error = [1 3 5 7]
-        }
-        String pass = request.getParameter("pass");
-        if (pass == null || pass.isEmpty()) {
-            error += 2; // error = [2 3 6 7]
-        }
-        String nombre = request.getParameter("nombre");
-        if (nombre == null || nombre.isEmpty()) {
-            error += 4; // error = [4 5 6 7]
-        }
-        String apellidos = request.getParameter("apellidos");
-        String twitter = request.getParameter("twitter");
-        String instagram = request.getParameter("instagram");
-        String web = request.getParameter("web");
-        String foto = request.getParameter("foto");
-        
-        Usuario u;
-        String next = "/Principal";
-        if (error == 0) {
-            Boolean nuevo = Boolean.FALSE;
-            if (id == null) {
-                u = new Usuario();
-                nuevo = Boolean.TRUE;
-                next = "/login.jsp";
+        if (usuarioId != null) {
+            AficionPK apk = new AficionPK();
+            apk.setNombre(str);
+            apk.setUsuario(usuarioId);
+            Aficion a = aficionFacade.find(apk);
+            if (a != null) {
+                aficionFacade.remove(a);
+                str = "/EditarAficiones";
             } else {
-                u = usuarioFacade.find(id);
-            }
-            u.setEmail(email);
-            u.setPass(pass);
-            u.setNombre(nombre);
-            u.setApellidos(apellidos);
-            u.setTwitter(twitter);
-            u.setInstagram(instagram);
-            u.setWeb(web);
-            u.setFoto(foto);
-            if (nuevo) {
-                usuarioFacade.create(u);
-            } else {
-                usuarioFacade.edit(u);
+                str = "/Logout";
             }
         } else {
-            request.setAttribute("error", error);
-            next = "/editarPerfil.jsp";
-            // COMPLETAR
-            // Faltan datos para del insert y se vuelve al jsp correspondiente
-            // indicando los campos que faltan por rellenar
+            str = "/Logout";
         }
         
-        RequestDispatcher rd = getServletContext().getRequestDispatcher(next);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher(str);
         rd.forward(request, response);
     }
 

@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,7 +38,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Mensaje.findById", query = "SELECT m FROM Mensaje m WHERE m.id = :id")
     , @NamedQuery(name = "Mensaje.findByMensaje", query = "SELECT m FROM Mensaje m WHERE m.mensaje = :mensaje")
     , @NamedQuery(name = "Mensaje.findByFecha", query = "SELECT m FROM Mensaje m WHERE m.fecha = :fecha")
-    , @NamedQuery(name = "Mensaje.findByVisto", query = "SELECT m FROM Mensaje m WHERE m.visto = :visto")})
+    , @NamedQuery(name = "Mensaje.findByVisto", query = "SELECT m FROM Mensaje m WHERE m.visto = :visto")
+    // CONSULTAS PERSONALIZADAS
+    , @NamedQuery(name = "Mensaje.findByVistoYReceptor", query = "SELECT m FROM Mensaje m WHERE m.visto = :visto AND m.receptor = :receptor")
+    , @NamedQuery(name = "Mensaje.findByEmisor", query = "SELECT m FROM Mensaje m WHERE m.emisor = :emisor")
+    , @NamedQuery(name = "Mensaje.findByReceptor", query = "SELECT m FROM Mensaje m WHERE m.receptor = :receptor")})
+
 public class Mensaje implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,6 +52,7 @@ public class Mensaje implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "MENSAJE_SEQ")
     @SequenceGenerator(name="MENSAJE_SEQ", sequenceName = "MENSAJE_SEQ", allocationSize=1)
     private BigDecimal id;
     @Size(max = 250)

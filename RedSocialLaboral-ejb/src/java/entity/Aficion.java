@@ -6,7 +6,7 @@
 package entity;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -26,7 +26,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Aficion.findAll", query = "SELECT a FROM Aficion a")
     , @NamedQuery(name = "Aficion.findByNombre", query = "SELECT a FROM Aficion a WHERE a.aficionPK.nombre = :nombre")
-    , @NamedQuery(name = "Aficion.findByUsuario", query = "SELECT a FROM Aficion a WHERE a.aficionPK.usuario = :usuario")})
+    , @NamedQuery(name = "Aficion.findByUsuario", query = "SELECT a FROM Aficion a WHERE a.aficionPK.usuario = :usuario")
+    // CONSULTAS PERSONALIZADAS
+    , @NamedQuery(name = "Aficion.findByIdUsuario", query = "SELECT a FROM Aficion a WHERE a.aficionPK.usuario = :id")})
 public class Aficion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,7 +45,7 @@ public class Aficion implements Serializable {
         this.aficionPK = aficionPK;
     }
 
-    public Aficion(String nombre, BigInteger usuario) {
+    public Aficion(String nombre, BigDecimal usuario) {
         this.aficionPK = new AficionPK(nombre, usuario);
     }
 

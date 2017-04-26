@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -38,7 +40,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Experiencia.findByFechafin", query = "SELECT e FROM Experiencia e WHERE e.fechafin = :fechafin")
     , @NamedQuery(name = "Experiencia.findByEmpresa", query = "SELECT e FROM Experiencia e WHERE e.empresa = :empresa")
     , @NamedQuery(name = "Experiencia.findByPuesto", query = "SELECT e FROM Experiencia e WHERE e.puesto = :puesto")
-    , @NamedQuery(name = "Experiencia.findByWebempresa", query = "SELECT e FROM Experiencia e WHERE e.webempresa = :webempresa")})
+    , @NamedQuery(name = "Experiencia.findByWebempresa", query = "SELECT e FROM Experiencia e WHERE e.webempresa = :webempresa")
+    // CONSULTAS PERSONALIZADAS
+    , @NamedQuery(name = "Experiencia.findByIdUsuario", query = "SELECT e FROM Experiencia e WHERE e.usuario.id = :id")})
 public class Experiencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,6 +51,7 @@ public class Experiencia implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "EXPERIENCIA_SEQ")
     @SequenceGenerator(name="EXPERIENCIA_SEQ", sequenceName = "EXPERIENCIA_SEQ", allocationSize=1)
     private BigDecimal id;
     @Column(name = "FECHAINICIO")

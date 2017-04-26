@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -37,7 +39,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Estudios.findByFechainicio", query = "SELECT e FROM Estudios e WHERE e.fechainicio = :fechainicio")
     , @NamedQuery(name = "Estudios.findByFechafin", query = "SELECT e FROM Estudios e WHERE e.fechafin = :fechafin")
     , @NamedQuery(name = "Estudios.findByUbicacion", query = "SELECT e FROM Estudios e WHERE e.ubicacion = :ubicacion")
-    , @NamedQuery(name = "Estudios.findByDescripcion", query = "SELECT e FROM Estudios e WHERE e.descripcion = :descripcion")})
+    , @NamedQuery(name = "Estudios.findByDescripcion", query = "SELECT e FROM Estudios e WHERE e.descripcion = :descripcion")
+    // CONSULTAS PERSONALIZADAS
+    , @NamedQuery(name = "Estudios.findByIdUsuario", query = "SELECT e FROM Estudios e WHERE e.usuario.id = :id")})
 public class Estudios implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +50,7 @@ public class Estudios implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "ESTUDIOS_SEQ")
     @SequenceGenerator(name="ESTUDIOS_SEQ", sequenceName = "ESTUDIOS_SEQ", allocationSize=1)
     private BigDecimal id;
     @Column(name = "FECHAINICIO")

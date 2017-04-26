@@ -6,9 +6,12 @@
 package ejb;
 
 import entity.Mensaje;
+import entity.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +32,29 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         super(Mensaje.class);
     }
     
+    public List<Mensaje> findByEmisor(Usuario usuario) {
+        Query q;
+        
+        q = em.createNamedQuery("Mensaje.findByEmisor");
+        q.setParameter("emisor", usuario);
+        return q.getResultList(); 
+    }
+    
+    public List<Mensaje> findByReceptor(Usuario usuario) {
+        Query q;
+        
+        q = em.createNamedQuery("Mensaje.findByReceptor");
+        q.setParameter("receptor", usuario);
+        return q.getResultList(); 
+    }
+    
+    public List<Mensaje> findByVistoYReceptor(char c, Usuario usuario) {
+        Query q;
+        
+        q = em.createNamedQuery("Mensaje.findByVistoYReceptor");
+        q.setParameter("visto", c);
+        q.setParameter("receptor", usuario);
+        return q.getResultList(); 
+    }
+
 }

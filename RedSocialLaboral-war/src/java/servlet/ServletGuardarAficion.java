@@ -5,33 +5,19 @@
  */
 package servlet;
 
-
-import ejb.UsuarioFacade;
-import entity.Usuario;
 import java.io.IOException;
-import java.math.BigDecimal;
-import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Roberto
  */
-@WebServlet(name = "ServletVerPerfil", urlPatterns = {"/VerPerfil"})
-public class ServletVerPerfil extends HttpServlet {
-
-    @EJB
-    private final UsuarioFacade usuarioFacade;
-    
-    public ServletVerPerfil() {
-        usuarioFacade = new UsuarioFacade();
-    }
+@WebServlet(name = "ServletGuardarAficion", urlPatterns = {"/GuardarAficion"})
+public class ServletGuardarAficion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,16 +30,6 @@ public class ServletVerPerfil extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        
-        BigDecimal id = (BigDecimal) session.getAttribute("usuarioId");
-        
-        Usuario usuario = usuarioFacade.find(id);
-        
-        request.setAttribute("usuarioSeleccionado", usuario);
-        
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/verPerfil.jsp");
-        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

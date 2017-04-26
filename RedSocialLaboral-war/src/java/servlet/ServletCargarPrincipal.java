@@ -5,10 +5,14 @@
  */
 package servlet;
 
+import ejb.MensajeFacade;
 import ejb.UsuarioFacade;
+import entity.Mensaje;
 import entity.Usuario;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,8 +32,12 @@ public class ServletCargarPrincipal extends HttpServlet {
     @EJB
     private final UsuarioFacade usuarioFacade;
     
+    @EJB
+    private MensajeFacade mensajeFacade;
+    
     public ServletCargarPrincipal() {
         usuarioFacade = new UsuarioFacade();
+        mensajeFacade = new MensajeFacade();
     }
 
     /**
@@ -49,7 +57,11 @@ public class ServletCargarPrincipal extends HttpServlet {
         
         if (id != null) {
             Usuario u = usuarioFacade.find(id);
-            request.setAttribute("datos", u.getApellidos() + ", " + u.getNombre());
+            
+            Collection<Mensaje> mensajes = new ArrayList<Mensaje>();
+            mensajes = mensajeFacade.findByVistoYReceptor('F', u);
+            request.setAttribute("mensajes", new ArrayList<Mensaje>(mensajes));
+            
             next = "/principal.jsp";
         } else {
             next = "/error.jsp";

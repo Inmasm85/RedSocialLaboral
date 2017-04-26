@@ -4,9 +4,10 @@
 <%
     String msg;
     String titulo;
-    Usuario u = (Usuario) request.getAttribute("usuario");
+    Usuario u = (Usuario) request.getAttribute("usuarioSeleccionado");
     if (u == null) {
         u = new Usuario();
+        u.setId(null);
         u.setEmail("");
         u.setPass("");
         u.setNombre("");
@@ -25,7 +26,7 @@
         error = new Integer(0);
     }
     
-    String back = "Principal";
+    String back = "VerPerfil";
     if (u.getId() == null) {
         back = "login.jsp";
     }
