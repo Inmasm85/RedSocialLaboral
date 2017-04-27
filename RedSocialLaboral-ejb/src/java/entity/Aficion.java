@@ -28,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Aficion.findByNombre", query = "SELECT a FROM Aficion a WHERE a.aficionPK.nombre = :nombre")
     , @NamedQuery(name = "Aficion.findByUsuario", query = "SELECT a FROM Aficion a WHERE a.aficionPK.usuario = :usuario")
     // CONSULTAS PERSONALIZADAS
-    , @NamedQuery(name = "Aficion.findByIdUsuario", query = "SELECT a FROM Aficion a WHERE a.aficionPK.usuario = :id")})
+    , @NamedQuery(name = "Aficion.findByIdUsuario", query = "SELECT a FROM Aficion a WHERE a.aficionPK.usuario = :id")
+    , @NamedQuery(name = "Aficion.findByIdUsuarioAndNombreAficion", query = "SELECT a FROM Aficion a WHERE a.aficionPK.usuario = :id AND a.aficionPK.nombre = :nombre")})
 public class Aficion implements Serializable {
 
     private static final long serialVersionUID = 1L;

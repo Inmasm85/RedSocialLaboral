@@ -37,4 +37,11 @@ public class AficionFacade extends AbstractFacade<Aficion> {
         q.setParameter("id", id);
         return q.getResultList();
     }
+    
+    public Aficion findByIdUsuarioAndNombreAficion(BigDecimal id, String nombre) {
+        Query q = em.createNamedQuery("Aficion.findByIdUsuarioAndNombreAficion");
+        q.setParameter("id", id);
+        q.setParameter("nombre", nombre);
+        return (Aficion) q.getResultList().get(0);
+    }
 }

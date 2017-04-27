@@ -71,8 +71,8 @@ public class ServletGuardarEstudios extends HttpServlet {
             } else {
                 e = estudiosFacade.find(estudiosId);
             }
-            e.setUsuario(u);
             if (e != null) {
+                e.setUsuario(u);
                 str = request.getParameter("fechaInicio");
                 if (str != null && !str.isEmpty()) {
                     e.setFechainicio(new Date(str));

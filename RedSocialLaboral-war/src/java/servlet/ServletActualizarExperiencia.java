@@ -5,10 +5,10 @@
  */
 package servlet;
 
-import ejb.AficionFacade;
-import entity.Aficion;
-import entity.AficionPK;
+import ejb.ExperienciaFacade;
+import entity.Experiencia;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -17,22 +17,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Roberto
+ * @author anton
  */
-@WebServlet(name = "ServletGuardarAficion", urlPatterns = {"/GuardarAficion"})
-public class ServletGuardarAficion extends HttpServlet {
+@WebServlet(name = "ServletActualizarExperiencia", urlPatterns = {"/ActualizarExperiencia"})
+public class ServletActualizarExperiencia extends HttpServlet {
 
     @EJB
-    private final AficionFacade aficionFacade;
-    
-    public ServletGuardarAficion() {
-        aficionFacade = new AficionFacade();
-    }
+    private ExperienciaFacade experienciaFacade;
 
+    public ServletActualizarExperiencia(){
+        experienciaFacade = new ExperienciaFacade();
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,43 +43,15 @@ public class ServletGuardarAficion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        BigDecimal usuarioId = (BigDecimal) session.getAttribute("usuarioId");
-        String str = request.getParameter("nombreAficion");
-        if (usuarioId != null) {
-            String anterior = request.getParameter("anterior");
-            Aficion a;            
-            if (str != null && !str.isEmpty()) {
-                if (anterior != null && !anterior.isEmpty()) {
-                    if (!str.equals(anterior)) {
-                        a = aficionFacade.findByIdUsuarioAndNombreAficion(usuarioId, anterior);
-                        if (a != null) {
-                            aficionFacade.remove(a);
-                            a = aficionFacade.findByIdUsuarioAndNombreAficion(usuarioId, str);
-                            if (a == null) {
-                                AficionPK apk = new AficionPK(str, usuarioId);
-                                a = new Aficion(apk);
-                                aficionFacade.create(a);
-                            }
-                            str = "/EditarAficiones";
-                        } else {
-                            str = "/Logout";
-                        }
-                    } else {
-                        str = "/EditarAficiones";
-                    }
-                } else {
-                    a = aficionFacade.findByIdUsuarioAndNombreAficion(usuarioId, str);
-                    if (a == null) {
-                        AficionPK apk = new AficionPK(str, usuarioId);
-                        a = new Aficion(apk);
-                        aficionFacade.create(a);
-                    }
-                    str = "/EditarAficiones";
-                }
-            } else {
-                str = "/Logout";
-            }
+        String str = request.getParameter("experienciaId");
+        if(str!=null && !str.isEmpty()){
+            BigDecimal experienciaId = new BigDecimal(str);
+            Experiencia e = experienciaFacade.find(experienciaId);
+            str = "/editarExperiencia.jsp";
+            
+            request.setAttribute("experiencia", e);
+        } else {
+            str = "/Logout";
         }
         
         RequestDispatcher rd = getServletContext().getRequestDispatcher(str);

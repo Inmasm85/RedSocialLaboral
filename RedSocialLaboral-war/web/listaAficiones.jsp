@@ -24,8 +24,8 @@
 %>
                     <tr>
                         <td><%= a.getAficionPK().getNombre() %></td>
-                        <td><a href="ActualizarAficion?aficion=<%= a.getAficionPK().getNombre() %>">Editar</a></td>
-                        <td><a href="BorrarAficion?aficion=<%= a.getAficionPK().getNombre() %>">Borrar</a></td>
+                        <td><a href="ActualizarAficion?nombreAficion=<%= a.getAficionPK().getNombre() %>">Editar</a></td>
+                        <td><a href="BorrarAficion?nombreAficion=<%= a.getAficionPK().getNombre() %>">Borrar</a></td>
                     </tr>
 <%
                 }
