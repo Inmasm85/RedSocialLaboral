@@ -1,7 +1,7 @@
 <%-- 
     Document   : principal
     Created on : 24-abr-2017, 16:24:36
-    Author     : anton
+    Author     : Antonio Joaquín Luque
 --%>
 
 <%@page import="java.util.List"%>

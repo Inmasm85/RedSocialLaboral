@@ -32,7 +32,7 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         super(Mensaje.class);
     }
     
-    // author: anton
+    // author: Antonio Joaquín Luque
     public List<Mensaje> findByEmisor(Usuario usuario) {
         Query q;
         
@@ -41,7 +41,7 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         return q.getResultList(); 
     }
     
-    // author: anton
+    // author: Antonio Joaquín Luque
     public List<Mensaje> findByReceptor(Usuario usuario) {
         Query q;
         
@@ -50,7 +50,7 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         return q.getResultList(); 
     }
     
-    // author: anton
+    // author: Antonio Joaquín Luque
     public List<Mensaje> findByVistoYReceptor(char c, Usuario usuario) {
         Query q;
         

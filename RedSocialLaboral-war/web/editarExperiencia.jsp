@@ -1,7 +1,7 @@
 <%-- 
     Document   : editarExperiencia
     Created on : 26-abr-2017, 18:02:22
-    Author     : anton
+    Author     : Antonio Joaquín Luque
 --%>
 
 <%@page import="java.text.SimpleDateFormat"%>

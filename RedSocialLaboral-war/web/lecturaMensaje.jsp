@@ -1,7 +1,7 @@
 <%-- 
     Document   : lecturaMensaje
     Created on : 04-abr-2017, 19:55:31
-    Author     : anton
+    Author     : Antonio Joaquín Luque
 --%>
 
 <%@page import="entity.Mensaje"%>

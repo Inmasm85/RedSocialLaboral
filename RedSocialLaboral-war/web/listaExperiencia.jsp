@@ -1,6 +1,6 @@
 <%-- 
     Document   : listaExperiencia
-    Author     : anton y Roberto Sanchez
+    Author     : Antonio Joaquín Luque y Roberto Sanchez
 --%>
 
 <%@page import="java.text.SimpleDateFormat"%>

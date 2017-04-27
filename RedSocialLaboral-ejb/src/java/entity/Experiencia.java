@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Experiencia.findByPuesto", query = "SELECT e FROM Experiencia e WHERE e.puesto = :puesto")
     , @NamedQuery(name = "Experiencia.findByWebempresa", query = "SELECT e FROM Experiencia e WHERE e.webempresa = :webempresa")
     // CONSULTAS PERSONALIZADAS
-      // author: anton
+      // author: Antonio Joaquín Luque
     , @NamedQuery(name = "Experiencia.findByIdUsuario", query = "SELECT e FROM Experiencia e WHERE e.usuario.id = :id")})
 public class Experiencia implements Serializable {
 

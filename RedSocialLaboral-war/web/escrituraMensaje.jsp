@@ -1,7 +1,7 @@
 <%-- 
     Document   : escrituraMensaje
     Created on : 03-abr-2017, 10:20:39
-    Author     : anton
+    Author     : Antonio Joaquín Luque
 --%>
 
 <%@page import="java.util.List"%>

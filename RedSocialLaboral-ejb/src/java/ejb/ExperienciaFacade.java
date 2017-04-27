@@ -32,7 +32,7 @@ public class ExperienciaFacade extends AbstractFacade<Experiencia> {
         super(Experiencia.class);
     }
     
-    // author: anton
+    // author: Antonio Joaquín Luque
     public Collection<Experiencia> findByIdUsuario(BigDecimal id) {
         Query q = em.createNamedQuery("Experiencia.findByIdUsuario");
         q.setParameter("id", id);
