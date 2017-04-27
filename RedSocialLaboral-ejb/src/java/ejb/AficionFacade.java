@@ -15,7 +15,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Inma
+ * @author NetBeans
  */
 @Stateless
 public class AficionFacade extends AbstractFacade<Aficion> {
@@ -32,12 +32,14 @@ public class AficionFacade extends AbstractFacade<Aficion> {
         super(Aficion.class);
     }
     
+    // author: Roberto Sanchez
     public Collection<Aficion> findByIdUsuario(BigDecimal id) {
         Query q = em.createNamedQuery("Aficion.findByIdUsuario");
         q.setParameter("id", id);
         return q.getResultList();
     }
     
+    // author: Roberto Sanchez
     public Aficion findByIdUsuarioAndNombreAficion(BigDecimal id, String nombre) {
         Query q = em.createNamedQuery("Aficion.findByIdUsuarioAndNombreAficion");
         q.setParameter("id", id);

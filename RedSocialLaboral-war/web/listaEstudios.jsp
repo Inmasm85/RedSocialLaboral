@@ -1,3 +1,8 @@
+<%-- 
+    Document   : listaEstudios
+    Author     : Roberto Sanchez
+--%>
+
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Collection"%>
 <%@page import="entity.Estudios"%>

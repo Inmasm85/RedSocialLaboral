@@ -1,3 +1,8 @@
+<%-- 
+    Document   : editarAficion
+    Author     : Roberto Sanchez
+--%>
+
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.math.BigDecimal"%>

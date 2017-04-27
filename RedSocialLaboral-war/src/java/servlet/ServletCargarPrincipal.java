@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Roberto
+ * @author Roberto Sanchez
  */
 @WebServlet(name = "ServletCargarPrincipal", urlPatterns = {"/Principal"})
 public class ServletCargarPrincipal extends HttpServlet {

@@ -1,3 +1,8 @@
+<%-- 
+    Document   : error
+    Author     : Roberto Sanchez
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

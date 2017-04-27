@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Inma
+ * @author NetBeans
  */
 @Entity
 @Table(name = "USUARIO")

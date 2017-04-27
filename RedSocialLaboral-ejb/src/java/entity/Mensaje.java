@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Inma
+ * @author NetBeans
  */
 @Entity
 @Table(name = "MENSAJE")
@@ -40,6 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Mensaje.findByFecha", query = "SELECT m FROM Mensaje m WHERE m.fecha = :fecha")
     , @NamedQuery(name = "Mensaje.findByVisto", query = "SELECT m FROM Mensaje m WHERE m.visto = :visto")
     // CONSULTAS PERSONALIZADAS
+      // author: anton
     , @NamedQuery(name = "Mensaje.findByVistoYReceptor", query = "SELECT m FROM Mensaje m WHERE m.visto = :visto AND m.receptor = :receptor")
     , @NamedQuery(name = "Mensaje.findByEmisor", query = "SELECT m FROM Mensaje m WHERE m.emisor = :emisor")
     , @NamedQuery(name = "Mensaje.findByReceptor", query = "SELECT m FROM Mensaje m WHERE m.receptor = :receptor")})

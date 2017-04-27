@@ -15,7 +15,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Inma
+ * @author NetBeans
  */
 @Stateless
 public class EstudiosFacade extends AbstractFacade<Estudios> {
@@ -32,6 +32,7 @@ public class EstudiosFacade extends AbstractFacade<Estudios> {
         super(Estudios.class);
     }
     
+    // author: Roberto Sanchez
     public Collection<Estudios> findByIdUsuario(BigDecimal id) {
         Query q = em.createNamedQuery("Estudios.findByIdUsuario");
         q.setParameter("id", id);

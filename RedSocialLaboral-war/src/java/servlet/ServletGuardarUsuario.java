@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Roberto
+ * @author Roberto Sanchez
  */
 @WebServlet(name = "ServletGuardarUsuario", urlPatterns = {"/Guardar"})
 public class ServletGuardarUsuario extends HttpServlet {

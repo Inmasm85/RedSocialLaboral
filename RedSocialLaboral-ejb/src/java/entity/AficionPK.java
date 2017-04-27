@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Inma
+ * @author NetBeans
  */
 @Embeddable
 public class AficionPK implements Serializable {

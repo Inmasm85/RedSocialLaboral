@@ -1,3 +1,8 @@
+<%-- 
+    Document   : listaExperiencia
+    Author     : anton y Roberto Sanchez
+--%>
+
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entity.Experiencia"%>
 <%@page import="java.util.Collection"%>

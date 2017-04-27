@@ -1,3 +1,8 @@
+<%-- 
+    Document   : editarAficion
+    Author     : Roberto Sanchez
+--%>
+
 <%@page import="entity.AficionPK"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="entity.Aficion"%>

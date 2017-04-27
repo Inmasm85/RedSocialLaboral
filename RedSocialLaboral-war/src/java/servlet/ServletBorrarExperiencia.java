@@ -16,6 +16,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+/**
+ *
+ * @author anton y Roberto Sanchez
+ */
 @WebServlet(name = "ServletBorrarExperiencia", urlPatterns = {"/BorrarExperiencia"})
 public class ServletBorrarExperiencia extends HttpServlet {
 

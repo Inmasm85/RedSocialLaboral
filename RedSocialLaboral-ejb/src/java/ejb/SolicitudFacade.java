@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Inma
+ * @author NetBeans
  */
 @Stateless
 public class SolicitudFacade extends AbstractFacade<Solicitud> {

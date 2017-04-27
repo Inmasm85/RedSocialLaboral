@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Inma
+ * @author NetBeans
  */
 @Embeddable
 public class SolicitudPK implements Serializable {

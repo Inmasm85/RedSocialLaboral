@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Inma
+ * @author NetBeans
  */
 @Entity
 @Table(name = "SOLICITUD")

@@ -14,7 +14,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Inma
+ * @author NetBeans
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> {
@@ -31,6 +31,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         super(Usuario.class);
     }
     
+    // author: Roberto Sanchez
     public Usuario findByEmail(String email) {
         Query q = em.createNamedQuery("Usuario.findByEmail");
         q.setParameter("email", email);

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Roberto
+ * @author Roberto Sanchez
  */
 @WebServlet(name = "ServletActualizarAficion", urlPatterns = {"/ActualizarAficion"})
 public class ServletActualizarAficion extends HttpServlet {

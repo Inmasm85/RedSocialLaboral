@@ -1,3 +1,8 @@
+<%-- 
+    Document   : editarPerfil
+    Author     : Roberto Sanchez
+--%>
+
 <%@page import="entity.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -15,7 +15,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Inma
+ * @author NetBeans
  */
 @Stateless
 public class MensajeFacade extends AbstractFacade<Mensaje> {
@@ -32,6 +32,7 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         super(Mensaje.class);
     }
     
+    // author: anton
     public List<Mensaje> findByEmisor(Usuario usuario) {
         Query q;
         
@@ -40,6 +41,7 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         return q.getResultList(); 
     }
     
+    // author: anton
     public List<Mensaje> findByReceptor(Usuario usuario) {
         Query q;
         
@@ -48,6 +50,7 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         return q.getResultList(); 
     }
     
+    // author: anton
     public List<Mensaje> findByVistoYReceptor(char c, Usuario usuario) {
         Query q;
         

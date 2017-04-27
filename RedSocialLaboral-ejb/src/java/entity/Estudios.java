@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Inma
+ * @author NetBeans
  */
 @Entity
 @Table(name = "ESTUDIOS")
@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Estudios.findByUbicacion", query = "SELECT e FROM Estudios e WHERE e.ubicacion = :ubicacion")
     , @NamedQuery(name = "Estudios.findByDescripcion", query = "SELECT e FROM Estudios e WHERE e.descripcion = :descripcion")
     // CONSULTAS PERSONALIZADAS
+      // author: Roberto Sanchez
     , @NamedQuery(name = "Estudios.findByIdUsuario", query = "SELECT e FROM Estudios e WHERE e.usuario.id = :id")})
 public class Estudios implements Serializable {
 
